@@ -28,28 +28,31 @@ struct Story: View {
 	let footnote: String
 	let score: String
 	let commentCount: String
+    let url:String
 	
 	var body: some View {
-		HStack(alignment: .top, spacing: 16.0) {
-			Position(position: position)
-			VStack(alignment: .leading, spacing: 8.0) {
-				Text(title)
-					.font(.headline)
-				Text(footnote)
-					.font(.footnote)
-					.foregroundColor(.secondary)
-				ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
-					Badge(text: score, imageName: "arrowtriangle.up.circle")
-						.foregroundColor(.teal)
-					Badge(text: commentCount, imageName: "ellipses.bubble")
-						.padding(.leading, 96.0)
-						.foregroundColor(.orange)
-				}
-				.font(.callout)
-				.padding(.bottom)
-			}
-		}
-		.padding(.top, 16.0)
+        NavigationLink(destination: DetailView(url: url)) {
+            HStack(alignment: .top, spacing: 16.0) {
+                Position(position: position)
+                VStack(alignment: .leading, spacing: 8.0) {
+                    Text(title)
+                        .font(.headline)
+                    Text(footnote)
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
+                        Badge(text: score, imageName: "arrowtriangle.up.circle")
+                            .foregroundColor(.teal)
+                        Badge(text: commentCount, imageName: "ellipses.bubble")
+                            .padding(.leading, 96.0)
+                            .foregroundColor(.orange)
+                    }
+                    .font(.callout)
+                    .padding(.bottom)
+                }
+            }
+            .padding(.top, 16.0)
+        }
 	}
 }
 
@@ -62,6 +65,7 @@ extension Story {
 		footnote = item.url.formatted
 			+ " - \(item.date.timeAgo)"
 			+ " - by \(item.author)"
+        self.url = item.url.absoluteString
 	}
 }
 

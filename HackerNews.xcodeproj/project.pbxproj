@@ -17,6 +17,8 @@
 		95A852572538913B007A1D16 /* Story.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A852562538913B007A1D16 /* Story.json */; };
 		95A8525A25389192007A1D16 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8525925389192007A1D16 /* TestData.swift */; };
 		95A8525D253893ED007A1D16 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8525C253893ED007A1D16 /* Formatting.swift */; };
+		F42E038828C5C15B00E31BCA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E038728C5C15B00E31BCA /* WebView.swift */; };
+		F42E038A28C5C18B00E31BCA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E038928C5C18B00E31BCA /* DetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		95A852562538913B007A1D16 /* Story.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Story.json; sourceTree = "<group>"; };
 		95A8525925389192007A1D16 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		95A8525C253893ED007A1D16 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		F42E038728C5C15B00E31BCA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
+		F42E038928C5C18B00E31BCA /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +69,8 @@
 			isa = PBXGroup;
 			children = (
 				95A8524D25388F47007A1D16 /* HackerNewsApp.swift */,
+				F42E038728C5C15B00E31BCA /* WebView.swift */,
+				F42E038928C5C18B00E31BCA /* DetailView.swift */,
 				95A8524E25388F47007A1D16 /* NewsView.swift */,
 				95A1E37125403DC400052C21 /* NewsViewModel.swift */,
 				95A8525C253893ED007A1D16 /* Formatting.swift */,
@@ -158,6 +164,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				95A1E37225403DC400052C21 /* NewsViewModel.swift in Sources */,
+				F42E038A28C5C18B00E31BCA /* DetailView.swift in Sources */,
+				F42E038828C5C15B00E31BCA /* WebView.swift in Sources */,
 				95A1E36E2540375800052C21 /* APIRequest.swift in Sources */,
 				95A8525425388FB1007A1D16 /* Item.swift in Sources */,
 				95A8525125388F47007A1D16 /* NewsView.swift in Sources */,
@@ -293,7 +301,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HackerNews/Preview Content\"";
-				DEVELOPMENT_TEAM = DU7ZKD3PP7;
+				DEVELOPMENT_TEAM = 3Z26732YPL;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -301,7 +309,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.purecreek.HackerNews;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelhsieh.HackerNewsReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -315,7 +323,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"HackerNews/Preview Content\"";
-				DEVELOPMENT_TEAM = DU7ZKD3PP7;
+				DEVELOPMENT_TEAM = 3Z26732YPL;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = HackerNews/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
@@ -323,7 +331,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.purecreek.HackerNews;
+				PRODUCT_BUNDLE_IDENTIFIER = com.michaelhsieh.HackerNewsReader;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
