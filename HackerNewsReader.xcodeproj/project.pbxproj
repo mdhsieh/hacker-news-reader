@@ -22,7 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9575A730253860F900AFA2CC /* HackerNews.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNews.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9575A730253860F900AFA2CC /* HackerNewsReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HackerNewsReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9575A737253860FD00AFA2CC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9575A73A253860FD00AFA2CC /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		9575A73C253860FD00AFA2CC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,7 +60,7 @@
 		9575A731253860F900AFA2CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9575A730253860F900AFA2CC /* HackerNews.app */,
+				9575A730253860F900AFA2CC /* HackerNewsReader.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -96,9 +96,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9575A72F253860F900AFA2CC /* HackerNews */ = {
+		9575A72F253860F900AFA2CC /* HackerNewsReader */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9575A73F253860FD00AFA2CC /* Build configuration list for PBXNativeTarget "HackerNews" */;
+			buildConfigurationList = 9575A73F253860FD00AFA2CC /* Build configuration list for PBXNativeTarget "HackerNewsReader" */;
 			buildPhases = (
 				9575A72C253860F900AFA2CC /* Sources */,
 				9575A72D253860F900AFA2CC /* Frameworks */,
@@ -108,9 +108,9 @@
 			);
 			dependencies = (
 			);
-			name = HackerNews;
+			name = HackerNewsReader;
 			productName = HackerNews;
-			productReference = 9575A730253860F900AFA2CC /* HackerNews.app */;
+			productReference = 9575A730253860F900AFA2CC /* HackerNewsReader.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -140,7 +140,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9575A72F253860F900AFA2CC /* HackerNews */,
+				9575A72F253860F900AFA2CC /* HackerNewsReader */,
 			);
 		};
 /* End PBXProject section */
@@ -350,7 +350,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9575A73F253860FD00AFA2CC /* Build configuration list for PBXNativeTarget "HackerNews" */ = {
+		9575A73F253860FD00AFA2CC /* Build configuration list for PBXNativeTarget "HackerNewsReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9575A740253860FD00AFA2CC /* Debug */,
