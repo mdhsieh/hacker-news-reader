@@ -1,12 +1,11 @@
 //
 //  DetailView.swift
-//  Hacker News
+//  HackerNews
 //
-//  Created by Michael Hsieh on 5/29/22.
+//  Created by Michael Hsieh on 9/4/22.
 //
 
 import SwiftUI
-
 
 struct DetailView: View {
     let url:String?
@@ -21,5 +20,3 @@ struct DetailView_Previews: PreviewProvider {
         DetailView(url: "https://www.google.com")
     }
 }
-
-
