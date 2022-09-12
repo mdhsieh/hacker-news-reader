@@ -127,7 +127,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 9575A72B253860F900AFA2CC /* Build configuration list for PBXProject "HackerNews" */;
+			buildConfigurationList = 9575A72B253860F900AFA2CC /* Build configuration list for PBXProject "HackerNewsReader" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -341,7 +341,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9575A72B253860F900AFA2CC /* Build configuration list for PBXProject "HackerNews" */ = {
+		9575A72B253860F900AFA2CC /* Build configuration list for PBXProject "HackerNewsReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9575A73D253860FD00AFA2CC /* Debug */,
