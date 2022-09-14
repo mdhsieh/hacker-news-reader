@@ -11,13 +11,30 @@ struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
 	
 	var body: some View {
-		List(model.stories.indices) { index in
-			if let story = model.stories[index] {
-				Story(position: index + 1, item: story)
-			}
-		}
-		.navigationTitle("News")
-		.onAppear(perform: model.fetchTopStories)
+        
+        TabView {
+            NavigationView {
+                List(model.stories.indices) { index in
+                    if let story = model.stories[index] {
+                        Story(position: index + 1, item: story)
+                    }
+                }
+                .navigationTitle("News")
+                .onAppear(perform: model.fetchTopStories)
+                
+            }.tabItem {
+                Label("News", systemImage: "newspaper")
+            }
+
+            NavigationView {
+                List {
+
+                }
+                .navigationTitle("Favorites")
+            }.tabItem {
+                Label("Favorites", systemImage: "heart")
+            }
+        }
 	}
 }
 

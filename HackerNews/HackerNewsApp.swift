@@ -11,9 +11,7 @@ import SwiftUI
 struct HackerNewsApp: App {
 	var body: some Scene {
 		WindowGroup {
-			NavigationView {
-				NewsView()
-			}
+            NewsView()
 		}
 	}
 }
