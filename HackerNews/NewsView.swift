@@ -35,7 +35,11 @@ struct NewsView: View {
                 .navigationTitle("News")
                 .onAppear(perform: model.fetchTopStories)
                 
-            }.tabItem {
+            }
+            .refreshable {
+                model.fetchTopStories()
+            }
+            .tabItem {
                 Label("News", systemImage: "newspaper")
             }
 
