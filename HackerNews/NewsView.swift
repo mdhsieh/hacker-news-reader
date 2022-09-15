@@ -17,6 +17,19 @@ struct NewsView: View {
                 List(model.stories.indices) { index in
                     if let story = model.stories[index] {
                         Story(position: index + 1, item: story)
+                            .contextMenu {
+                                Button(
+                                    action: {
+                                        // save article
+                                        
+                                    },
+                                    label: {
+                                        Text("Add to favorites")
+                                        Image(systemName: "heart.fill")
+                                    }
+                                )
+                             
+                            }
                     }
                 }
                 .navigationTitle("News")
