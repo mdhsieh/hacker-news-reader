@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+// Only for item exists function
+import CoreData
 
 struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
@@ -15,6 +17,12 @@ struct NewsView: View {
     @FetchRequest(sortDescriptors: [
         SortDescriptor(\.date, order: .reverse)
     ]) var favorites: FetchedResults<FavoriteItem>
+    
+    private func itemExists(title: String, author: String) -> Bool {
+       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
+       fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
+       return ((try? moc.count(for: fetchRequest)) ?? 0) > 0
+    }
 	
 	var body: some View {
         
@@ -24,26 +32,37 @@ struct NewsView: View {
                     if let story = model.stories[index] {
                         Story(position: index + 1, item: story)
                             .contextMenu {
-                                Button(
-                                    action: {
-                                        // save article
-                                        let favorite = FavoriteItem(context: moc)
-                                        favorite.id = UUID()
-                                        favorite.title = story.title
-                                        favorite.author = story.author
-                                        favorite.score = Int64(story.score)
-                                        favorite.commentCount = Int64(story.commentCount)
-                                        favorite.url = story.url
-                                        favorite.date = story.date
-                                        
-                                        try? moc.save()
-                                    },
-                                    label: {
-                                        Text("Add to favorites")
-                                        Image(systemName: "heart.fill")
-                                    }
-                                )
-                             
+                                if (itemExists(title: story.title, author: story.author)) {
+                                    Button(
+                                        action: {
+                                            // option to delete instead
+                                        },
+                                        label: {
+                                            Text("Remove from favorites")
+                                            Image(systemName: "heart.slash")
+                                        }
+                                    )
+                                } else {
+                                    Button(
+                                        action: {
+                                            // save article
+                                            let favorite = FavoriteItem(context: moc)
+                                            favorite.id = UUID()
+                                            favorite.title = story.title
+                                            favorite.author = story.author
+                                            favorite.score = Int64(story.score)
+                                            favorite.commentCount = Int64(story.commentCount)
+                                            favorite.url = story.url
+                                            favorite.date = story.date
+                                            
+                                            try? moc.save()
+                                        },
+                                        label: {
+                                            Text("Add to favorites")
+                                            Image(systemName: "heart.fill")
+                                        }
+                                    )
+                                }
                             }
                     }
                 }
