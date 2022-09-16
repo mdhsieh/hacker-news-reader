@@ -94,9 +94,6 @@ struct Story: View {
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
                         Badge(text: score, imageName: "arrowtriangle.up.circle")
                             .foregroundColor(.teal)
-                        Badge(text: commentCount, imageName: "ellipses.bubble")
-                            .padding(.leading, 96.0)
-                            .foregroundColor(.orange)
                     }
                     .font(.callout)
                     .padding(.bottom)

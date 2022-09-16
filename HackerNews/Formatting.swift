@@ -29,9 +29,3 @@ extension Date {
 		return formatter.localizedString(for: self, relativeTo: Date())
 	}
 }
-
-extension Color {
-	static var teal: Color {
-		Color(UIColor.systemTeal)
-	}
-}
