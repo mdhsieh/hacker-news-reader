@@ -60,9 +60,7 @@ struct NewsView: View {
 
             NavigationView {
                 List(favorites) { favoriteNews in
-                    NavigationLink(destination: DetailView(url: favoriteNews.url)) {
-                        Text(favoriteNews.title ?? "Unknown")
-                    }
+                    FavoriteStory(favorite: favoriteNews)
                 }
                 .navigationTitle("Favorites")
             }.tabItem {
@@ -154,4 +152,32 @@ struct NewsView_Previews: PreviewProvider {
 		}
 		.previewLayout(.sizeThatFits)
 	}
+}
+
+struct FavoriteStory: View {
+    
+    var favorite: FavoriteItem
+    
+    var body: some View {
+        NavigationLink(destination: DetailView(url: favorite.url)) {
+            HStack(alignment: .top, spacing: 16.0) {
+                VStack(alignment: .leading, spacing: 8.0) {
+                    Text(favorite.title ?? "Unknown")
+                        .font(.headline)
+                    Text(favorite.url ?? ""
+                         + " - \(favorite.date?.timeAgo ?? "Unknown")"
+                         + " - by \(favorite.author ?? "Unknown")")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                    ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
+                        Badge(text: String(favorite.score), imageName: "arrowtriangle.up.circle")
+                            .foregroundColor(.teal)
+                    }
+                    .font(.callout)
+                    .padding(.bottom)
+                }
+            }
+            .padding(.top, 16.0)
+        }
+    }
 }
