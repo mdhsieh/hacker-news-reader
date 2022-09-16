@@ -9,6 +9,12 @@ import SwiftUI
 
 struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
+    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: [
+        // SortDescriptor(\.title),
+        SortDescriptor(\.date)
+    ]) var favorites: FetchedResults<FavoriteItem>
 	
 	var body: some View {
         
@@ -21,7 +27,16 @@ struct NewsView: View {
                                 Button(
                                     action: {
                                         // save article
+                                        let favorite = FavoriteItem(context: moc)
+                                        favorite.id = UUID()
+                                        favorite.title = story.title
+                                        favorite.author = story.author
+                                        favorite.score = Int64(story.score)
+                                        favorite.commentCount = Int64(story.commentCount)
+                                        favorite.url = story.url.absoluteString
+                                        favorite.date = story.date
                                         
+                                        try? moc.save()
                                     },
                                     label: {
                                         Text("Add to favorites")
@@ -44,8 +59,10 @@ struct NewsView: View {
             }
 
             NavigationView {
-                List {
-
+                List(favorites) { favoriteNews in
+                    NavigationLink(destination: DetailView(url: favoriteNews.url)) {
+                        Text(favoriteNews.title ?? "Unknown")
+                    }
                 }
                 .navigationTitle("Favorites")
             }.tabItem {
