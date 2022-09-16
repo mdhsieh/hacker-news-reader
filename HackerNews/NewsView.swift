@@ -11,9 +11,9 @@ struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
     
     @Environment(\.managedObjectContext) var moc
+    // Fetch favorites by latest date first, in order to match fetched latest news order
     @FetchRequest(sortDescriptors: [
-        // SortDescriptor(\.title),
-        SortDescriptor(\.date)
+        SortDescriptor(\.date, order: .reverse)
     ]) var favorites: FetchedResults<FavoriteItem>
 	
 	var body: some View {
@@ -33,7 +33,7 @@ struct NewsView: View {
                                         favorite.author = story.author
                                         favorite.score = Int64(story.score)
                                         favorite.commentCount = Int64(story.commentCount)
-                                        favorite.url = story.url.absoluteString
+                                        favorite.url = story.url
                                         favorite.date = story.date
                                         
                                         try? moc.save()
@@ -77,10 +77,10 @@ struct Story: View {
 	let footnote: String
 	let score: String
 	let commentCount: String
-    let url:String
+    let urlStr:String
 	
 	var body: some View {
-        NavigationLink(destination: DetailView(url: url)) {
+        NavigationLink(destination: DetailView(url: urlStr)) {
             HStack(alignment: .top, spacing: 16.0) {
                 Position(position: position)
                 VStack(alignment: .leading, spacing: 8.0) {
@@ -111,7 +111,7 @@ extension Story {
 		footnote = item.url.formatted
 			+ " - \(item.date.timeAgo)"
 			+ " - by \(item.author)"
-        self.url = item.url.absoluteString
+        self.urlStr = item.url.absoluteString
 	}
 }
 
@@ -159,12 +159,12 @@ struct FavoriteStory: View {
     var favorite: FavoriteItem
     
     var body: some View {
-        NavigationLink(destination: DetailView(url: favorite.url)) {
+        NavigationLink(destination: DetailView(url: favorite.url?.absoluteString)) {
             HStack(alignment: .top, spacing: 16.0) {
                 VStack(alignment: .leading, spacing: 8.0) {
                     Text(favorite.title ?? "Unknown")
                         .font(.headline)
-                    Text(favorite.url ?? ""
+                    Text(favorite.url?.formatted ?? ""
                          + " - \(favorite.date?.timeAgo ?? "Unknown")"
                          + " - by \(favorite.author ?? "Unknown")")
                         .font(.footnote)
