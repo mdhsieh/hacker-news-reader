@@ -61,6 +61,22 @@ struct NewsView: View {
             NavigationView {
                 List(favorites) { favoriteNews in
                     FavoriteStory(favorite: favoriteNews)
+                        .contextMenu {
+                            Button(
+                                action: {
+                                    // delete it from the context
+                                    moc.delete(favoriteNews)
+                                    
+                                    // save the context
+                                    try? moc.save()
+                                },
+                                label: {
+                                    Text("Remove from favorites")
+                                    Image(systemName: "heart.slash")
+                                }
+                            )
+                         
+                        }
                 }
                 .navigationTitle("Favorites")
             }.tabItem {
