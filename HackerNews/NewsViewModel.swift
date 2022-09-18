@@ -9,6 +9,7 @@ import Foundation
 
 class NewsViewModel: ObservableObject {
 	@Published var stories: [Item?] = Array(repeating: nil, count: 100)
+    @Published var searchText:String = ""
 	
     func fetchStories(filteredBy:String) {
         var url:URL
@@ -33,4 +34,18 @@ class NewsViewModel: ObservableObject {
 		let request = APIRequest(url: url)
 		request.perform(with: completion)
 	}
+    
+    var filteredStories: [Item?] {
+        // If search is empty, return the whole list since there's no filters
+        if (searchText == "") {
+            return stories
+        } else {
+            return stories.filter( { story -> Bool in
+                if let unwrappedStory = story {
+                    return unwrappedStory.title.lowercased().contains(searchText.lowercased())
+                }
+                return false
+            } )
+        }
+    }
 }

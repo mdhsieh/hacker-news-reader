@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Item: Identifiable {
+struct Item: Identifiable, Equatable, Hashable {
 	let id: Int
 	let commentCount: Int
 	let score: Int

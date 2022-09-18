@@ -18,6 +18,7 @@ struct NewsView: View {
         SortDescriptor(\.date, order: .reverse)
     ]) var favorites: FetchedResults<FavoriteItem>
     
+    // Nav bar sort options
     @AppStorage("filterQuery") private var filterQuery = "top"
     let filters = ["top", "newest"]
     
@@ -31,8 +32,10 @@ struct NewsView: View {
         
         TabView {
             NavigationView {
-                List(model.stories.indices) { index in
-                    if let story = model.stories[index] {
+                let filteredStories = model.filteredStories.compactMap { $0 }
+                let filteredStoriesIndexed = filteredStories.enumerated().map({ $0 })
+                List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
+                    if let story = filteredStory {
                         Story(position: index + 1, item: story)
                             .contextMenu {
                                 if (itemExists(title: story.title, author: story.author)) {
@@ -70,6 +73,7 @@ struct NewsView: View {
                     }
                 }
                 .navigationTitle("News")
+                .searchable(text: $model.searchText)
                 .toolbar {
                     // Filter by new or top stories
                     ToolbarItem(placement: .navigationBarTrailing) {
