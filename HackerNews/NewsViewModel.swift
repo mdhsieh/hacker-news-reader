@@ -8,7 +8,7 @@
 import Foundation
 
 class NewsViewModel: ObservableObject {
-	@Published var stories: [Item?] = Array(repeating: nil, count: 200)
+	@Published var stories: [Item?] = Array(repeating: nil, count: 100)
 	
     func fetchStories(filteredBy:String) {
         var url:URL
@@ -19,7 +19,7 @@ class NewsViewModel: ObservableObject {
         }
         let request = APIRequest(url: url)
         request.perform { [weak self] (ids: [Int]?) -> Void in
-            guard let ids = ids?.prefix(200) else { return }
+            guard let ids = ids?.prefix(100) else { return }
             for (index, id) in ids.enumerated() {
                 self?.fetchStory(withID: id) { story in
                     self?.stories[index] = story
