@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Equatable in order to compare during search. Hashable in order to show in ForEach to do filtering
 struct Item: Identifiable, Equatable, Hashable {
 	let id: Int
 	let commentCount: Int
