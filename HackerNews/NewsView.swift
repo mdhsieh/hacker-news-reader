@@ -42,11 +42,11 @@ struct NewsView: View {
                                 if (itemExists(title: story.title, author: story.author)) {
                                     Button(
                                         action: {
-                                            // option to delete instead
+                                            // No action
                                         },
                                         label: {
-                                            Text("Remove from favorites")
-                                            Image(systemName: "heart.slash")
+                                            Text("Added to favorites")
+                                            Image(systemName: "heart.fill")
                                         }
                                     )
                                 } else {
@@ -66,7 +66,7 @@ struct NewsView: View {
                                         },
                                         label: {
                                             Text("Add to favorites")
-                                            Image(systemName: "heart.fill")
+                                            Image(systemName: "heart")
                                         }
                                     )
                                 }
