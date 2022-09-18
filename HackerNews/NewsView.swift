@@ -18,6 +18,9 @@ struct NewsView: View {
         SortDescriptor(\.date, order: .reverse)
     ]) var favorites: FetchedResults<FavoriteItem>
     
+    @AppStorage("filterQuery") private var filterQuery = "top"
+    let filters = ["top", "newest"]
+    
     private func itemExists(title: String, author: String) -> Bool {
        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
@@ -67,11 +70,37 @@ struct NewsView: View {
                     }
                 }
                 .navigationTitle("News")
-                .onAppear(perform: model.fetchTopStories)
+                .toolbar {
+                    // Filter by new or top stories
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Picker("", selection: $filterQuery) {
+                                ForEach(filters, id: \.self) {
+                                    Text($0)
+                                }
+                            }
+                            .onChange(of: filterQuery) { newValue in
+                                model.fetchStories(filteredBy: newValue)
+                            }
+                        } label: {
+                            HStack {
+                                Text("Sort by: \(filterQuery)")
+                                    .font(.callout)
+                                Image(systemName: "line.3.horizontal.decrease.circle")
+                            }
+                            
+                        }
+                        
+
+                    }
+                }
+                .onAppear {
+                    model.fetchStories(filteredBy: filterQuery)
+                }
                 
             }
             .refreshable {
-                model.fetchTopStories()
+                model.fetchStories(filteredBy: filterQuery)
             }
             .tabItem {
                 Label("News", systemImage: "newspaper")
