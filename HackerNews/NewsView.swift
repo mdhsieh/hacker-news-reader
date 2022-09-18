@@ -32,8 +32,9 @@ struct NewsView: View {
         
         TabView {
             NavigationView {
-                let filteredStories = model.filteredStories.compactMap { $0 }
-                let filteredStoriesIndexed = filteredStories.enumerated().map({ $0 })
+                // Get both the index and the Item? in order to show position number
+                // Need id because the (index, Item?) pair is not Identifiable
+                let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
                 List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
                     if let story = filteredStory {
                         Story(position: index + 1, item: story)
