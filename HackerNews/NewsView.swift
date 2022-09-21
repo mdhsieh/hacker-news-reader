@@ -27,6 +27,8 @@ struct NewsView: View {
        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
        return ((try? moc.count(for: fetchRequest)) ?? 0) > 0
     }
+    
+    
 	
 	var body: some View {
         
@@ -93,14 +95,20 @@ struct NewsView: View {
                                     .font(.callout)
                                 Image(systemName: "line.3.horizontal.decrease.circle")
                             }
-                            
                         }
-                        
-
+                    }
+                    
+                    ToolbarItemGroup(placement: .navigationBarLeading) {
+                        Button("Allow Notifications") {
+                            NotificationManager.instance.requestNotification()
+                        }
                     }
                 }
                 .onAppear {
                     model.fetchStories(filteredBy: filterQuery)
+                    
+                    // remove the notification badge after open app
+                    UIApplication.shared.applicationIconBadgeNumber = 0
                 }
                 
             }

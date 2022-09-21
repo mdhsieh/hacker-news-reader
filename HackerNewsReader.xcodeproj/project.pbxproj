@@ -22,6 +22,7 @@
 		F432E53628D7A3A1000DD37D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */; };
 		F479FB6028D44D240037B3F9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479FB5F28D44D240037B3F9 /* DataController.swift */; };
 		F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F479FB6128D44D730037B3F9 /* NewsApp.xcdatamodeld */; };
+		F4AAD88428DBBAFF0068F6F3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +43,7 @@
 		F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		F479FB5F28D44D240037B3F9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		F479FB6228D44D730037B3F9 /* FavoriteItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteItem.xcdatamodel; sourceTree = "<group>"; };
+		F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,7 @@
 				95A1E36D2540375800052C21 /* APIRequest.swift */,
 				95A8525325388FB1007A1D16 /* Item.swift */,
 				F479FB5F28D44D240037B3F9 /* DataController.swift */,
+				F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */,
 				95A852562538913B007A1D16 /* Story.json */,
 				9575A737253860FD00AFA2CC /* Assets.xcassets */,
 				9575A73C253860FD00AFA2CC /* Info.plist */,
@@ -179,6 +182,7 @@
 				F42E038828C5C15B00E31BCA /* WebView.swift in Sources */,
 				95A1E36E2540375800052C21 /* APIRequest.swift in Sources */,
 				95A8525425388FB1007A1D16 /* Item.swift in Sources */,
+				F4AAD88428DBBAFF0068F6F3 /* NotificationManager.swift in Sources */,
 				F479FB6028D44D240037B3F9 /* DataController.swift in Sources */,
 				95A8525125388F47007A1D16 /* NewsView.swift in Sources */,
 				95A8525A25389192007A1D16 /* TestData.swift in Sources */,
