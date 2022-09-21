@@ -16,8 +16,8 @@ class NotificationManager {
     func requestNotification() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                print("All set!")
                 NotificationManager.instance.showNotification()
+                print("Scheduling notification!")
             } else if let error = error {
                 print(error.localizedDescription)
             }
@@ -31,7 +31,15 @@ class NotificationManager {
         content.sound = UNNotificationSound.default
         content.badge = 1
         
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // trigger
+        // let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+        // Calendar
+        var dateComponents = DateComponents()
+        // 24 hour clock
+        dateComponents.hour = 15
+        dateComponents.minute = 0
+        
+        let trigger = UNCalendarNotificationTrigger(dateMatching: dateComponents, repeats: true)
         
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         
