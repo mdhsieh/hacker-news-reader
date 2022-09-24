@@ -21,15 +21,7 @@ struct NewsView: View {
     // Nav bar sort options
     @AppStorage("filterQuery") private var filterQuery = "top"
     let filters = ["top", "newest"]
-    
-    private func itemExists(title: String, author: String) -> Bool {
-       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
-       fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
-       return ((try? moc.count(for: fetchRequest)) ?? 0) > 0
-    }
-    
-    
-	
+
 	var body: some View {
         
         TabView {
@@ -37,79 +29,48 @@ struct NewsView: View {
                 // Get both the index and the Item? in order to show position number
                 // Need id because the (index, Item?) pair is not Identifiable
                 let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
-                List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
-                    if let story = filteredStory {
-                        Story(position: index + 1, item: story)
-                            .contextMenu {
-                                if (itemExists(title: story.title, author: story.author)) {
-                                    Button(
-                                        action: {
-                                            // No action
-                                        },
-                                        label: {
-                                            Text("Added to favorites")
-                                            Image(systemName: "heart.fill")
-                                        }
-                                    )
-                                } else {
-                                    Button(
-                                        action: {
-                                            // save article
-                                            let favorite = FavoriteItem(context: moc)
-                                            favorite.id = UUID()
-                                            favorite.title = story.title
-                                            favorite.author = story.author
-                                            favorite.score = Int64(story.score)
-                                            favorite.commentCount = Int64(story.commentCount)
-                                            favorite.url = story.url
-                                            favorite.date = story.date
-                                            
-                                            try? moc.save()
-                                        },
-                                        label: {
-                                            Text("Add to favorites")
-                                            Image(systemName: "heart")
-                                        }
-                                    )
-                                }
-                            }
+                VStack {
+                    switch model.resultState {
+                    case .loading:
+                        ProgressView().progressViewStyle(CircularProgressViewStyle()).scaleEffect(3).tint(.teal)
+                    case .success:
+                        BrowseNewsView(model: model, filteredStoriesIndexed: filteredStoriesIndexed)
                     }
                 }
-                .navigationTitle("News")
-                .searchable(text: $model.searchText)
-                .toolbar {
-                    // Filter by new or top stories
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Menu {
-                            Picker("", selection: $filterQuery) {
-                                ForEach(filters, id: \.self) {
-                                    Text($0)
+                    .navigationTitle("News")
+                    .searchable(text: $model.searchText)
+                    .toolbar {
+                        // Filter by new or top stories
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Menu {
+                                Picker("", selection: $filterQuery) {
+                                    ForEach(filters, id: \.self) {
+                                        Text($0)
+                                    }
+                                }
+                                .onChange(of: filterQuery) { newValue in
+                                    model.fetchStories(filteredBy: newValue)
+                                }
+                            } label: {
+                                HStack {
+                                    Text("Sort by: \(filterQuery)")
+                                        .font(.callout)
+                                    Image(systemName: "line.3.horizontal.decrease.circle")
                                 }
                             }
-                            .onChange(of: filterQuery) { newValue in
-                                model.fetchStories(filteredBy: newValue)
-                            }
-                        } label: {
-                            HStack {
-                                Text("Sort by: \(filterQuery)")
-                                    .font(.callout)
-                                Image(systemName: "line.3.horizontal.decrease.circle")
+                        }
+                        ToolbarItemGroup(placement: .navigationBarLeading) {
+                            Button("Allow Notifications") {
+                                NotificationManager.instance.requestNotification()
                             }
                         }
                     }
-                    
-                    ToolbarItemGroup(placement: .navigationBarLeading) {
-                        Button("Allow Notifications") {
-                            NotificationManager.instance.requestNotification()
-                        }
+                    .onAppear {
+                        model.fetchStories(filteredBy: filterQuery)
+                        
+                        // remove the notification badge after open app
+                        UIApplication.shared.applicationIconBadgeNumber = 0
                     }
-                }
-                .onAppear {
-                    model.fetchStories(filteredBy: filterQuery)
-                    
-                    // remove the notification badge after open app
-                    UIApplication.shared.applicationIconBadgeNumber = 0
-                }
                 
             }
             .refreshable {
@@ -256,5 +217,61 @@ struct FavoriteStory: View {
             }
             .padding(.top, 16.0)
         }
+    }
+}
+
+struct BrowseNewsView: View {
+    
+    @Environment(\.managedObjectContext) var moc
+
+    @ObservedObject var model: NewsViewModel
+    var filteredStoriesIndexed: [EnumeratedSequence<[Item?]>.Element]
+    
+    private func itemExists(title: String, author: String) -> Bool {
+       let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
+       fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
+       return ((try? moc.count(for: fetchRequest)) ?? 0) > 0
+    }
+    
+    var body: some View {
+        List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
+            if let story = filteredStory {
+                Story(position: index + 1, item: story)
+                    .contextMenu {
+                        if (itemExists(title: story.title, author: story.author)) {
+                            Button(
+                                action: {
+                                    // No action
+                                },
+                                label: {
+                                    Text("Added to favorites")
+                                    Image(systemName: "heart.fill")
+                                }
+                            )
+                        } else {
+                            Button(
+                                action: {
+                                    // save article
+                                    let favorite = FavoriteItem(context: moc)
+                                    favorite.id = UUID()
+                                    favorite.title = story.title
+                                    favorite.author = story.author
+                                    favorite.score = Int64(story.score)
+                                    favorite.commentCount = Int64(story.commentCount)
+                                    favorite.url = story.url
+                                    favorite.date = story.date
+                                    
+                                    try? moc.save()
+                                },
+                                label: {
+                                    Text("Add to favorites")
+                                    Image(systemName: "heart")
+                                }
+                            )
+                        }
+                    }
+            }
+        }
+        
     }
 }

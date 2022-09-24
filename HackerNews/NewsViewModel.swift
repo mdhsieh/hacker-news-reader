@@ -10,6 +10,14 @@ import Foundation
 class NewsViewModel: ObservableObject {
 	@Published var stories: [Item?] = Array(repeating: nil, count: 100)
     @Published var searchText:String = ""
+    
+    enum ResultState {
+        case loading
+        case success
+//        case failed
+    }
+
+    @Published var resultState: ResultState = .loading
 	
     func fetchStories(filteredBy:String) {
         var url:URL
@@ -26,6 +34,9 @@ class NewsViewModel: ObservableObject {
                     self?.stories[index] = story
                 }
             }
+            
+            // Finished loading
+            self?.resultState = .success
         }
     }
 	
