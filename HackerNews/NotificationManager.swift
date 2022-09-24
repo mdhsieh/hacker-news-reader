@@ -24,7 +24,6 @@ class NotificationManager {
                 NotificationManager.instance.scheduleRepeatedDailyNotification()
                 print("Scheduled daily notification")
                 NotificationManager.instance.shouldScheduleNotifications = false
-                print("Scheduling now set to \(NotificationManager.instance.shouldScheduleNotifications)")
             } else if let error = error {
                 print(error.localizedDescription)
             }

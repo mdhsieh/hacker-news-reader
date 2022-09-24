@@ -13,10 +13,6 @@ struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
     
     @Environment(\.managedObjectContext) var moc
-    // Fetch favorites by latest date first, in order to match fetched latest news order
-    @FetchRequest(sortDescriptors: [
-        SortDescriptor(\.date, order: .reverse)
-    ]) var favorites: FetchedResults<FavoriteItem>
     
     // Nav bar sort options
     @AppStorage("filterQuery") private var filterQuery = "top"
@@ -68,8 +64,6 @@ struct NewsView: View {
                         
                         if (NotificationManager.instance.shouldScheduleNotifications) {
                             NotificationManager.instance.requestNotification()
-                        } else {
-                            print("Notifications are already scheduled")
                         }
                     }
                 
@@ -82,26 +76,7 @@ struct NewsView: View {
             }
 
             NavigationView {
-                List(favorites) { favoriteNews in
-                    FavoriteStory(favorite: favoriteNews)
-                        .contextMenu {
-                            Button(
-                                action: {
-                                    // delete it from the context
-                                    moc.delete(favoriteNews)
-                                    
-                                    // save the context
-                                    try? moc.save()
-                                },
-                                label: {
-                                    Text("Remove from favorites")
-                                    Image(systemName: "heart.slash")
-                                }
-                            )
-                         
-                        }
-                }
-                .navigationTitle("Favorites")
+                FavoritesView()
             }.tabItem {
                 Label("Favorites", systemImage: "heart")
             }
@@ -274,5 +249,39 @@ struct BrowseNewsView: View {
             }
         }
         
+    }
+}
+
+struct FavoritesView: View {
+    @Environment(\.managedObjectContext) var moc
+    
+    // Fetch favorites by latest date first, in order to match fetched latest news order
+    @FetchRequest(sortDescriptors: [
+        SortDescriptor(\.date, order: .reverse)
+    ]) var favorites: FetchedResults<FavoriteItem>
+    
+    var body: some View {
+        List(favorites
+             
+        ) { favoriteNews in
+            FavoriteStory(favorite: favoriteNews)
+                .contextMenu {
+                    Button(
+                        action: {
+                            // delete it from the context
+                            moc.delete(favoriteNews)
+                            
+                            // save the context
+                            try? moc.save()
+                        },
+                        label: {
+                            Text("Remove from favorites")
+                            Image(systemName: "heart.slash")
+                        }
+                    )
+                    
+                }
+        }
+        .navigationTitle("Favorites")
     }
 }
