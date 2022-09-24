@@ -34,7 +34,7 @@ struct NewsView: View {
                     }
                 }
                     .navigationTitle("News")
-                    .searchable(text: $model.searchText)
+                    .searchable(text: $model.searchText, placement: .navigationBarDrawer(displayMode: .always))
                     .toolbar {
                         // Filter by new or top stories
                         ToolbarItem(placement: .navigationBarTrailing) {
