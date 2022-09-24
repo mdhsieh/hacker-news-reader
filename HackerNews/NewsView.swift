@@ -59,17 +59,18 @@ struct NewsView: View {
                                 }
                             }
                         }
-                        ToolbarItemGroup(placement: .navigationBarLeading) {
-                            Button("Allow Notifications") {
-                                NotificationManager.instance.requestNotification()
-                            }
-                        }
                     }
                     .onAppear {
                         model.fetchStories(filteredBy: filterQuery)
                         
                         // remove the notification badge after open app
                         UIApplication.shared.applicationIconBadgeNumber = 0
+                        
+                        if (NotificationManager.instance.shouldScheduleNotifications) {
+                            NotificationManager.instance.requestNotification()
+                        } else {
+                            print("Notifications are already scheduled")
+                        }
                     }
                 
             }

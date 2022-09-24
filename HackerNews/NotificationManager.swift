@@ -15,10 +15,16 @@ class NotificationManager {
     
     var newsTitles: [String?] = Array(repeating: nil, count: 5)
     
+    // Schedule daily notifications once on app startup
+    @AppStorage("shouldScheduleNotifications") var shouldScheduleNotifications = true
+    
     func requestNotification() {
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
             if success {
-                NotificationManager.instance.showNotification()
+                NotificationManager.instance.scheduleRepeatedDailyNotification()
+                print("Scheduled daily notification")
+                NotificationManager.instance.shouldScheduleNotifications = false
+                print("Scheduling now set to \(NotificationManager.instance.shouldScheduleNotifications)")
             } else if let error = error {
                 print(error.localizedDescription)
             }
@@ -26,7 +32,7 @@ class NotificationManager {
     }
     
     
-    func showNotification() {
+    func scheduleRepeatedDailyNotification() {
         let content = UNMutableNotificationContent()
         content.title = "Read stories today"
         content.subtitle = "Tap to read now"
