@@ -291,7 +291,7 @@ struct FavoritesView: View {
                 }
         }
         .navigationTitle("Favorites")
-        .searchable(text: $searchText)
+        .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .onChange(of: searchText) { newValue in
           favorites.nsPredicate = searchPredicate(query: newValue)
         }
