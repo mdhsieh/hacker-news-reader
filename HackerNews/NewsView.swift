@@ -260,10 +260,18 @@ struct FavoritesView: View {
         SortDescriptor(\.date, order: .reverse)
     ]) var favorites: FetchedResults<FavoriteItem>
     
+    @State private var searchText = ""
+    
+    private func searchPredicate(query: String) -> NSPredicate? {
+      if query.isEmpty {
+          return nil
+          
+      }
+        return NSPredicate(format: "title CONTAINS[cd] %@", query.lowercased())
+    }
+    
     var body: some View {
-        List(favorites
-             
-        ) { favoriteNews in
+        List(favorites) { favoriteNews in
             FavoriteStory(favorite: favoriteNews)
                 .contextMenu {
                     Button(
@@ -283,5 +291,9 @@ struct FavoritesView: View {
                 }
         }
         .navigationTitle("Favorites")
+        .searchable(text: $searchText)
+        .onChange(of: searchText) { newValue in
+          favorites.nsPredicate = searchPredicate(query: newValue)
+        }
     }
 }
