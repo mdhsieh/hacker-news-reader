@@ -42,7 +42,6 @@ struct NewsView: View {
                                 }
                                 .onChange(of: model.filterQuery) { newValue in
                                     model.fetchStories(filteredBy: newValue)
-                                    print("picker selection was changed to \(newValue). fetch stories")
                                 }
                             } label: {
                                 HStack {
