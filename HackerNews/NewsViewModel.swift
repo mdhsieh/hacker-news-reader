@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import SwiftUI
 
 class NewsViewModel: ObservableObject {
 	@Published var stories: [Item?] = Array(repeating: nil, count: 250)
     @Published var searchText:String = ""
+    
+    // Nav bar sort options
+    @AppStorage("filterQuery") var filterQuery = "top"
+    @Published var filters = ["top", "newest"]
     
     enum ResultState {
         case loading

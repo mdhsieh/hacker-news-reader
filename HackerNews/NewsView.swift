@@ -14,10 +14,6 @@ struct NewsView: View {
     
     @Environment(\.managedObjectContext) var moc
     
-    // Nav bar sort options
-    @AppStorage("filterQuery") private var filterQuery = "top"
-    let filters = ["top", "newest"]
-
 	var body: some View {
         
         TabView {
@@ -39,17 +35,18 @@ struct NewsView: View {
                         // Filter by new or top stories
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Menu {
-                                Picker("", selection: $filterQuery) {
-                                    ForEach(filters, id: \.self) {
+                                Picker("", selection: $model.filterQuery) {
+                                    ForEach(model.filters, id: \.self) {
                                         Text($0)
                                     }
                                 }
-                                .onChange(of: filterQuery) { newValue in
+                                .onChange(of: model.filterQuery) { newValue in
                                     model.fetchStories(filteredBy: newValue)
+                                    print("picker selection was changed to \(newValue). fetch stories")
                                 }
                             } label: {
                                 HStack {
-                                    Text("Sort by: \(filterQuery)")
+                                    Text("Sort by: \(model.filterQuery)")
                                         .font(.callout)
                                     Image(systemName: "line.3.horizontal.decrease.circle")
                                 }
@@ -57,7 +54,7 @@ struct NewsView: View {
                         }
                     }
                     .onAppear {
-                        model.fetchStories(filteredBy: filterQuery)
+                        model.fetchStories(filteredBy: model.filterQuery)
                         
                         // remove the notification badge after open app
                         UIApplication.shared.applicationIconBadgeNumber = 0
@@ -69,7 +66,7 @@ struct NewsView: View {
                 
             }
             .refreshable {
-                model.fetchStories(filteredBy: filterQuery)
+                model.fetchStories(filteredBy: model.filterQuery)
             }
             .tabItem {
                 Label("News", systemImage: "newspaper")
