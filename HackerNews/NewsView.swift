@@ -16,7 +16,8 @@ struct NewsView: View {
     
     // UserDefaults key is in quotes, variable is the actual name
 //    @AppStorage("selectedColor") var selectedColor: Color = .teal
-    @State private var selectedColor: Color = .teal
+    @State var selectedColor: Color = .teal
+//    @StateObject var colorManager = ColorManager()
     
 	var body: some View {
         
@@ -26,12 +27,17 @@ struct NewsView: View {
                 // Need id because the (index, Item?) pair is not Identifiable
                 let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
                 VStack {
+                    
                     CustomColorPicker(selectedColor: $selectedColor)
+                    .onChange(of: selectedColor, perform: { selectedColor in
+                        
+                    })
+                    
                     switch model.resultState {
                     case .loading:
-                        ProgressView().progressViewStyle(CircularProgressViewStyle()).scaleEffect(3).tint(.teal)
+                        ProgressView().progressViewStyle(CircularProgressViewStyle()).scaleEffect(3).tint(selectedColor)
                     case .success:
-                        BrowseNewsView(model: model, filteredStoriesIndexed: filteredStoriesIndexed)
+                        BrowseNewsView(model: model, filteredStoriesIndexed: filteredStoriesIndexed, selectedColor: selectedColor)
                     }
                 }
                     .navigationTitle("News")
@@ -77,7 +83,7 @@ struct NewsView: View {
             }
 
             NavigationView {
-                FavoritesView()
+                FavoritesView(selectedColor: selectedColor)
             }.tabItem {
                 Label("Favorites", systemImage: "heart")
             }
@@ -93,11 +99,12 @@ struct Story: View {
 	let score: String
 	let commentCount: String
     let urlStr:String
+    let selectedColor: Color
 	
 	var body: some View {
         NavigationLink(destination: DetailView(url: urlStr)) {
             HStack(alignment: .top, spacing: 16.0) {
-                Position(position: position)
+                Position(position: position, selectedColor: selectedColor)
                 VStack(alignment: .leading, spacing: 8.0) {
                     Text(title)
                         .font(.headline)
@@ -106,7 +113,7 @@ struct Story: View {
                         .foregroundColor(.secondary)
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
                         Badge(text: score, imageName: "arrowtriangle.up.circle")
-                            .foregroundColor(.teal)
+                            .foregroundColor(selectedColor)
                     }
                     .font(.callout)
                     .padding(.bottom)
@@ -118,7 +125,7 @@ struct Story: View {
 }
 
 extension Story {
-	init(position: Int, item: Item) {
+    init(position: Int, item: Item, selectedColor: Color) {
 		self.position = position
 		title = item.title
 		score = item.score.formatted
@@ -127,6 +134,7 @@ extension Story {
 			+ " - \(item.date.timeAgo)"
 			+ " - by \(item.author)"
         self.urlStr = item.url.absoluteString
+        self.selectedColor = selectedColor
 	}
 }
 
@@ -144,12 +152,13 @@ struct Badge: View {
 
 struct Position: View {
 	let position: Int
+    let selectedColor: Color
 	
 	var body: some View {
 		ZStack {
 			Circle()
 				.frame(width: 32.0, height: 32.0)
-				.foregroundColor(.teal)
+				.foregroundColor(selectedColor)
 			Text("\(position)")
 				.font(.callout)
 				.bold()
@@ -161,8 +170,8 @@ struct Position: View {
 struct NewsView_Previews: PreviewProvider {
 	static var previews: some View {
 		Group {
-			Story(position: 1, item: TestData.story)
-			Position(position: 1)
+            Story(position: 1, item: TestData.story, selectedColor: .teal)
+            Position(position: 1, selectedColor: .teal)
 			Badge(text: "1.234", imageName: "paperplane")
 		}
 		.previewLayout(.sizeThatFits)
@@ -172,6 +181,7 @@ struct NewsView_Previews: PreviewProvider {
 struct FavoriteStory: View {
     
     var favorite: FavoriteItem
+    var selectedColor: Color
     
     var body: some View {
         NavigationLink(destination: DetailView(url: favorite.url?.absoluteString)) {
@@ -186,7 +196,7 @@ struct FavoriteStory: View {
                         .foregroundColor(.secondary)
                     ZStack(alignment: Alignment(horizontal: .leading, vertical: .center)) {
                         Badge(text: String(favorite.score), imageName: "arrowtriangle.up.circle")
-                            .foregroundColor(.teal)
+                            .foregroundColor(selectedColor)
                     }
                     .font(.callout)
                     .padding(.bottom)
@@ -204,6 +214,8 @@ struct BrowseNewsView: View {
     @ObservedObject var model: NewsViewModel
     var filteredStoriesIndexed: [EnumeratedSequence<[Item?]>.Element]
     
+    var selectedColor: Color
+    
     private func itemExists(title: String, author: String) -> Bool {
        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
@@ -213,7 +225,7 @@ struct BrowseNewsView: View {
     var body: some View {
         List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
             if let story = filteredStory {
-                Story(position: index + 1, item: story)
+                Story(position: index + 1, item: story, selectedColor: selectedColor)
                     .contextMenu {
                         if (itemExists(title: story.title, author: story.author)) {
                             Button(
@@ -255,6 +267,7 @@ struct BrowseNewsView: View {
 
 struct FavoritesView: View {
     @Environment(\.managedObjectContext) var moc
+    var selectedColor: Color
     
     // Fetch favorites by latest date first, in order to match fetched latest news order
     @FetchRequest(sortDescriptors: [
@@ -273,7 +286,7 @@ struct FavoritesView: View {
     
     var body: some View {
         List(favorites) { favoriteNews in
-            FavoriteStory(favorite: favoriteNews)
+            FavoriteStory(favorite: favoriteNews, selectedColor: selectedColor)
                 .contextMenu {
                     Button(
                         action: {
