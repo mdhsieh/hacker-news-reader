@@ -14,10 +14,7 @@ struct NewsView: View {
     
     @Environment(\.managedObjectContext) var moc
     
-    // UserDefaults key is in quotes, variable is the actual name
-//    @AppStorage("selectedColor") var selectedColor: Color = .teal
     @State var selectedColor: Color = .teal
-//    @StateObject var colorManager = ColorManager()
     private var colorData = ColorData()
     
 	var body: some View {

@@ -4,6 +4,7 @@
 //
 //  Created by Michael Hsieh on 9/27/22.
 //
+// Represent a color as an array of RGB values, in order to save in user defaults
 
 import Foundation
 import SwiftUI
