@@ -21,6 +21,7 @@ struct CustomColorPicker: View {
                         .scaleEffect(color == selectedColor ? 1.1 : 1.0)
                         .onTapGesture {
                             selectedColor = color
+                            print("Changed color to \(selectedColor.description)")
                         }
                 }
             }

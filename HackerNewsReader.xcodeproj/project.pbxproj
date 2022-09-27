@@ -24,6 +24,7 @@
 		F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F479FB6128D44D730037B3F9 /* NewsApp.xcdatamodeld */; };
 		F4AAD88428DBBAFF0068F6F3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */; };
 		F4E3A06B28E2A0E50035F0E9 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */; };
+		F4E3A06D28E2A5AC0035F0E9 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A06C28E2A5AC0035F0E9 /* ColorExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		F479FB6228D44D730037B3F9 /* FavoriteItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteItem.xcdatamodel; sourceTree = "<group>"; };
 		F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
+		F4E3A06C28E2A5AC0035F0E9 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +97,7 @@
 				9575A739253860FD00AFA2CC /* Preview Content */,
 				F479FB6128D44D730037B3F9 /* NewsApp.xcdatamodeld */,
 				F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */,
+				F4E3A06C28E2A5AC0035F0E9 /* ColorExtension.swift */,
 			);
 			path = HackerNews;
 			sourceTree = "<group>";
@@ -184,6 +187,7 @@
 				F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */,
 				F42E038A28C5C18B00E31BCA /* DetailView.swift in Sources */,
 				F42E038828C5C15B00E31BCA /* WebView.swift in Sources */,
+				F4E3A06D28E2A5AC0035F0E9 /* ColorExtension.swift in Sources */,
 				95A1E36E2540375800052C21 /* APIRequest.swift in Sources */,
 				95A8525425388FB1007A1D16 /* Item.swift in Sources */,
 				F4AAD88428DBBAFF0068F6F3 /* NotificationManager.swift in Sources */,

@@ -14,6 +14,10 @@ struct NewsView: View {
     
     @Environment(\.managedObjectContext) var moc
     
+    // UserDefaults key is in quotes, variable is the actual name
+//    @AppStorage("selectedColor") var selectedColor: Color = .teal
+    @State private var selectedColor: Color = .teal
+    
 	var body: some View {
         
         TabView {
@@ -22,6 +26,7 @@ struct NewsView: View {
                 // Need id because the (index, Item?) pair is not Identifiable
                 let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
                 VStack {
+                    CustomColorPicker(selectedColor: $selectedColor)
                     switch model.resultState {
                     case .loading:
                         ProgressView().progressViewStyle(CircularProgressViewStyle()).scaleEffect(3).tint(.teal)
