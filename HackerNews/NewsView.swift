@@ -18,6 +18,7 @@ struct NewsView: View {
 //    @AppStorage("selectedColor") var selectedColor: Color = .teal
     @State var selectedColor: Color = .teal
 //    @StateObject var colorManager = ColorManager()
+    private var colorData = ColorData()
     
 	var body: some View {
         
@@ -28,10 +29,7 @@ struct NewsView: View {
                 let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
                 VStack {
                     
-                    CustomColorPicker(selectedColor: $selectedColor)
-                    .onChange(of: selectedColor, perform: { selectedColor in
-                        
-                    })
+                    CustomColorPicker(selectedColor: $selectedColor, colorData: colorData)
                     
                     switch model.resultState {
                     case .loading:
@@ -69,9 +67,14 @@ struct NewsView: View {
                         // remove the notification badge after open app
                         UIApplication.shared.applicationIconBadgeNumber = 0
                         
+                        // schedule daily notification if not scheduled already
                         if (NotificationManager.instance.shouldScheduleNotifications) {
                             NotificationManager.instance.requestNotification()
                         }
+                        
+                        // Change selected color to whatever was saved in
+                        // user defaults
+                        selectedColor = colorData.loadColor()
                     }
                 
             }

@@ -9,7 +9,8 @@ import SwiftUI
 
 struct CustomColorPicker: View {
     @Binding var selectedColor: Color
-    private let colors: [Color] = [.teal, .green, .orange, .purple, .indigo, .blue, .yellow]
+    private let colors: [Color] = [.teal, .green, .orange, .purple, .indigo, .blue, .yellow, .pink, .red]
+    var colorData: ColorData
     
     var body: some View {
         ScrollView(.horizontal) {
@@ -22,6 +23,7 @@ struct CustomColorPicker: View {
                         .onTapGesture {
                             selectedColor = color
                             print("Changed color to \(selectedColor.description)")
+                            colorData.saveColor(color: selectedColor)
                         }
                 }
             }
@@ -35,6 +37,6 @@ struct CustomColorPicker: View {
 
 struct CustomColorPicker_Previews: PreviewProvider {
     static var previews: some View {
-        CustomColorPicker(selectedColor: .constant(.blue))
+        CustomColorPicker(selectedColor: .constant(.blue), colorData: ColorData())
     }
 }
