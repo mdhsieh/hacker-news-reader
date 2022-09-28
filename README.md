@@ -5,12 +5,12 @@ A convenient way to read stories from the tech news website Hacker News (HN).
 Coming soon
 
 ## Screenshots
-![Browse News](screenshots/browse_news.png)
-![Add Favorite](screenshots/add_favorite.png)
-![Favorites](screenshots/favorites.png)
-![Sort](screenshots/sort_newest.png)
-![Dark Mode Green](screenshots/green_dark.png)
-![Dark Mode Green Favorites](screenshots/green_dark_favorites.png)
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/browse_news.png" width="50%" height="50%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/add_favorite.png" width="50%" height="50%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/favorites.png" width="50%" height="50%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/sort_newest.png" width="50%" height="50%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/green_dark.png" width="50%" height="50%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/green_dark_favorites.png" width="50%" height="50%">
 
 ## Features
 - Browse 100 top or latest stories
