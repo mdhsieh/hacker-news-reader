@@ -5,7 +5,7 @@ A convenient way to read stories from the tech news website Hacker News (HN).
 Coming soon
 
 ## Screenshots
-<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/browse_news.png" width="40%"">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/browse_news.png" width="40%">
 <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/add_favorite.png" width="40%">
 <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/favorites.png" width="40%">
 <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/sort_newest.png" width="40%">
