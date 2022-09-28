@@ -26,6 +26,9 @@ class NotificationManager {
                 NotificationManager.instance.shouldScheduleNotifications = false
             } else if let error = error {
                 print(error.localizedDescription)
+            } else if error == nil {
+                // Permission denied
+                print("Permission denied")
             }
         }
     }

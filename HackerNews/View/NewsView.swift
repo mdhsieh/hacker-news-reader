@@ -22,10 +22,8 @@ struct NewsView: View {
         TabView {
             NavigationView {
                 // Get both the index and the Item? in order to show position number
-                // Need id because the (index, Item?) pair is not Identifiable
                 let filteredStoriesIndexed = model.filteredStories.enumerated().map({ $0 })
                 VStack {
-                    
                     CustomColorPicker(selectedColor: $selectedColor, colorData: colorData)
                     
                     switch model.resultState {
@@ -35,44 +33,44 @@ struct NewsView: View {
                         BrowseNewsView(model: model, filteredStoriesIndexed: filteredStoriesIndexed, selectedColor: selectedColor)
                     }
                 }
-                    .navigationTitle("News")
-                    .searchable(text: $model.searchText, placement: .navigationBarDrawer(displayMode: .always))
-                    .toolbar {
-                        // Filter by new or top stories
-                        ToolbarItem(placement: .navigationBarTrailing) {
-                            Menu {
-                                Picker("", selection: $model.filterQuery) {
-                                    ForEach(model.filters, id: \.self) {
-                                        Text($0)
-                                    }
+                .navigationTitle("News")
+                .searchable(text: $model.searchText, placement: .navigationBarDrawer(displayMode: .always))
+                .toolbar {
+                    // Filter by new or top stories
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        Menu {
+                            Picker("", selection: $model.filterQuery) {
+                                ForEach(model.filters, id: \.self) {
+                                    Text($0)
                                 }
-                                .onChange(of: model.filterQuery) { newValue in
-                                    model.fetchStories(filteredBy: newValue)
-                                }
-                            } label: {
-                                HStack {
-                                    Text("Sort by: \(model.filterQuery)")
-                                        .font(.callout)
-                                    Image(systemName: "line.3.horizontal.decrease.circle")
-                                }
+                            }
+                            .onChange(of: model.filterQuery) { newValue in
+                                model.fetchStories(filteredBy: newValue)
+                            }
+                        } label: {
+                            HStack {
+                                Text("Sort by: \(model.filterQuery)")
+                                    .font(.callout)
+                                Image(systemName: "line.3.horizontal.decrease.circle")
                             }
                         }
                     }
-                    .onAppear {
-                        model.fetchStories(filteredBy: model.filterQuery)
-                        
-                        // remove the notification badge after open app
-                        UIApplication.shared.applicationIconBadgeNumber = 0
-                        
-                        // schedule daily notification if not scheduled already
-                        if (NotificationManager.instance.shouldScheduleNotifications) {
-                            NotificationManager.instance.requestNotification()
-                        }
-                        
-                        // Change selected color to whatever was saved in
-                        // user defaults
-                        selectedColor = colorData.loadColor()
+                }
+                .onAppear {
+                    model.fetchStories(filteredBy: model.filterQuery)
+                    
+                    // remove the notification badge after open app
+                    UIApplication.shared.applicationIconBadgeNumber = 0
+                    
+                    // schedule daily notification if not scheduled already
+                    if (NotificationManager.instance.shouldScheduleNotifications) {
+                        NotificationManager.instance.requestNotification()
                     }
+                    
+                    // Change selected color to whatever was saved in
+                    // user defaults
+                    selectedColor = colorData.loadColor()
+                }
                 
             }
             .refreshable {
@@ -222,6 +220,7 @@ struct BrowseNewsView: View {
        return ((try? moc.count(for: fetchRequest)) ?? 0) > 0
     }
     
+    // Need id because the (index, Item?) pair is not Identifiable
     var body: some View {
         List(filteredStoriesIndexed, id: \.element) { index, filteredStory in
             if let story = filteredStory {

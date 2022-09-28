@@ -24,11 +24,12 @@ struct CustomColorPicker: View {
                         Circle()
                             .stroke(Color.white, lineWidth: 4)
                             .background(Circle().fill(color))
+                            // Modifiers exact same for the other circles. Should
+                            // refactor to not repeat the modifiers somehow
                             .frame(width: 45, height: 45)
                             .scaleEffect(color == selectedColor ? 1.1 : 1.0)
                             .onTapGesture {
                                 selectedColor = color
-                                print("Changed selected color in dark mode to \(selectedColor.description)")
                                 colorData.saveColor(color: selectedColor)
                             }
                     } else if (color == selectedColor) {
@@ -40,7 +41,6 @@ struct CustomColorPicker: View {
                             .scaleEffect(color == selectedColor ? 1.1 : 1.0)
                             .onTapGesture {
                                 selectedColor = color
-                                print("Changed selected color in light mode to \(selectedColor.description)")
                                 colorData.saveColor(color: selectedColor)
                             }
                     }
@@ -52,7 +52,6 @@ struct CustomColorPicker: View {
                             .scaleEffect(color == selectedColor ? 1.1 : 1.0)
                             .onTapGesture {
                                 selectedColor = color
-                                print("Changed color to \(selectedColor.description)")
                                 colorData.saveColor(color: selectedColor)
                             }
                     }
