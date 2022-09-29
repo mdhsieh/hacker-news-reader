@@ -7,6 +7,7 @@ Coming soon
 ## Features
 - Browse 100 top or latest stories
 - Save favorites
+- Share
 - Search
 - Customizable color with dark/light mode support
 
