@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-// Only for item exists function
 import CoreData
 
 struct NewsView: View {
@@ -275,8 +274,8 @@ struct BrowseNewsView: View {
         }
         .sheet(isPresented: $sheetManager.shouldShowShareSheet) {
             ActivityViewController(activityItems: [
-                sheetManager.selectedItem?.title,
-                sheetManager.selectedItem?.url,
+                sheetManager.selectedItem?.title as Any,
+                sheetManager.selectedItem?.url as Any,
             ])
         }
         
@@ -341,8 +340,8 @@ struct FavoritesView: View {
         }
         .sheet(isPresented: $favoriteSheetManager.shouldShowShareSheet) {
             ActivityViewController(activityItems: [
-                favoriteSheetManager.selectedItem?.title,
-                favoriteSheetManager.selectedItem?.url,
+                favoriteSheetManager.selectedItem?.title as Any,
+                favoriteSheetManager.selectedItem?.url as Any,
             ])
         }
     }
