@@ -214,6 +214,8 @@ struct BrowseNewsView: View {
     
     var selectedColor: Color
     
+    @StateObject var sheetManager = SheetMananger()
+    
     private func itemExists(title: String, author: String) -> Bool {
        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "FavoriteItem")
        fetchRequest.predicate = NSPredicate(format: "title == %@ AND author == %@", title, author)
@@ -257,8 +259,25 @@ struct BrowseNewsView: View {
                                 }
                             )
                         }
+                        Button(
+                            action: {
+                                sheetManager.selectedItem = story
+                                sheetManager.shouldShowShareSheet.toggle()
+                            },
+                            label: {
+                                Text("Share")
+                                Image(systemName: "square.and.arrow.up")
+                            }
+                        )
                     }
             }
+            
+        }
+        .sheet(isPresented: $sheetManager.shouldShowShareSheet) {
+            ActivityViewController(activityItems: [
+                sheetManager.selectedItem?.title,
+                sheetManager.selectedItem?.url,
+            ])
         }
         
     }
@@ -274,6 +293,8 @@ struct FavoritesView: View {
     ]) var favorites: FetchedResults<FavoriteItem>
     
     @State private var searchText = ""
+    
+    @StateObject var favoriteSheetManager = FavoriteSheetMananger()
     
     private func searchPredicate(query: String) -> NSPredicate? {
       if query.isEmpty {
@@ -301,12 +322,28 @@ struct FavoritesView: View {
                         }
                     )
                     
+                    Button(
+                        action: {
+                            favoriteSheetManager.selectedItem = favoriteNews
+                            favoriteSheetManager.shouldShowShareSheet.toggle()
+                        },
+                        label: {
+                            Text("Share")
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    )
                 }
         }
         .navigationTitle("Favorites")
         .searchable(text: $searchText, placement: .navigationBarDrawer(displayMode: .always))
         .onChange(of: searchText) { newValue in
           favorites.nsPredicate = searchPredicate(query: newValue)
+        }
+        .sheet(isPresented: $favoriteSheetManager.shouldShowShareSheet) {
+            ActivityViewController(activityItems: [
+                favoriteSheetManager.selectedItem?.title,
+                favoriteSheetManager.selectedItem?.url,
+            ])
         }
     }
 }

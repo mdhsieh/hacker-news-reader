@@ -23,6 +23,9 @@
 		F479FB6028D44D240037B3F9 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F479FB5F28D44D240037B3F9 /* DataController.swift */; };
 		F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F479FB6128D44D730037B3F9 /* NewsApp.xcdatamodeld */; };
 		F4AAD88428DBBAFF0068F6F3 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */; };
+		F4C72F1228E53C8C006909E5 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C72F1128E53C8C006909E5 /* ActivityViewController.swift */; };
+		F4C72F1528E54A25006909E5 /* SheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C72F1428E54A25006909E5 /* SheetManager.swift */; };
+		F4C72F1728E54AC1006909E5 /* FavoriteSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C72F1628E54AC1006909E5 /* FavoriteSheetManager.swift */; };
 		F4E3A06B28E2A0E50035F0E9 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */; };
 		F4E3A07128E3A6070035F0E9 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A07028E3A6070035F0E9 /* ColorData.swift */; };
 /* End PBXBuildFile section */
@@ -46,6 +49,9 @@
 		F479FB5F28D44D240037B3F9 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 		F479FB6228D44D730037B3F9 /* FavoriteItem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteItem.xcdatamodel; sourceTree = "<group>"; };
 		F4AAD88328DBBAFF0068F6F3 /* NotificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		F4C72F1128E53C8C006909E5 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		F4C72F1428E54A25006909E5 /* SheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetManager.swift; sourceTree = "<group>"; };
+		F4C72F1628E54AC1006909E5 /* FavoriteSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSheetManager.swift; sourceTree = "<group>"; };
 		F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		F4E3A07028E3A6070035F0E9 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -89,6 +95,7 @@
 				F4E3A07628E3AD100035F0E9 /* Notifications */,
 				F4E3A07728E3AD2E0035F0E9 /* ColorPicker */,
 				F4E3A07828E3ADA20035F0E9 /* FormatHelper */,
+				F4C72F1328E53C97006909E5 /* ShareSheet */,
 				9575A737253860FD00AFA2CC /* Assets.xcassets */,
 				9575A73C253860FD00AFA2CC /* Info.plist */,
 				9575A739253860FD00AFA2CC /* Preview Content */,
@@ -104,6 +111,16 @@
 				95A852562538913B007A1D16 /* Story.json */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		F4C72F1328E53C97006909E5 /* ShareSheet */ = {
+			isa = PBXGroup;
+			children = (
+				F4C72F1128E53C8C006909E5 /* ActivityViewController.swift */,
+				F4C72F1428E54A25006909E5 /* SheetManager.swift */,
+				F4C72F1628E54AC1006909E5 /* FavoriteSheetManager.swift */,
+			);
+			path = ShareSheet;
 			sourceTree = "<group>";
 		};
 		F4E3A07228E3ACD80035F0E9 /* View */ = {
@@ -247,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				95A1E37225403DC400052C21 /* NewsViewModel.swift in Sources */,
+				F4C72F1528E54A25006909E5 /* SheetManager.swift in Sources */,
 				F4E3A06B28E2A0E50035F0E9 /* CustomColorPicker.swift in Sources */,
 				F4E3A07128E3A6070035F0E9 /* ColorData.swift in Sources */,
 				F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */,
@@ -258,7 +276,9 @@
 				F479FB6028D44D240037B3F9 /* DataController.swift in Sources */,
 				95A8525125388F47007A1D16 /* NewsView.swift in Sources */,
 				95A8525A25389192007A1D16 /* TestData.swift in Sources */,
+				F4C72F1728E54AC1006909E5 /* FavoriteSheetManager.swift in Sources */,
 				95A8525D253893ED007A1D16 /* Formatting.swift in Sources */,
+				F4C72F1228E53C8C006909E5 /* ActivityViewController.swift in Sources */,
 				95A8525025388F47007A1D16 /* HackerNewsApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
