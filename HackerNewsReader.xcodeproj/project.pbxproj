@@ -98,6 +98,7 @@
 				F4C72F1328E53C97006909E5 /* ShareSheet */,
 				9575A737253860FD00AFA2CC /* Assets.xcassets */,
 				9575A73C253860FD00AFA2CC /* Info.plist */,
+				95A8525925389192007A1D16 /* TestData.swift */,
 				9575A739253860FD00AFA2CC /* Preview Content */,
 			);
 			path = HackerNews;
@@ -107,7 +108,6 @@
 			isa = PBXGroup;
 			children = (
 				9575A73A253860FD00AFA2CC /* Preview Assets.xcassets */,
-				95A8525925389192007A1D16 /* TestData.swift */,
 				95A852562538913B007A1D16 /* Story.json */,
 			);
 			path = "Preview Content";
