@@ -17,5 +17,5 @@ Coming soon
 - Networking with JSON
 
 ## Screenshots
-<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/browse_news.png" width="40%"> <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/add_favorite.png" width="40%">
+<img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/browse_news.png" width="40%"> <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/add_favorite_share.png" width="40%">
 <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/favorites.png" width="40%"> <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/sort_newest.png" width="40%"> <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/green_dark.png" width="40%"> <img src="https://github.com/mdhsieh/hacker-news-reader/blob/master/screenshots/green_dark_favorites.png" width="40%">
