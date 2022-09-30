@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import Firebase
 
 struct NewsView: View {
 	@StateObject private var model = NewsViewModel()
@@ -45,6 +46,11 @@ struct NewsView: View {
                             }
                             .onChange(of: model.filterQuery) { newValue in
                                 model.fetchStories(filteredBy: newValue)
+                                
+                                FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                    AnalyticsParameterContentType: "sort by",
+                                    "filter": newValue
+                                ])
                             }
                         } label: {
                             HStack {
@@ -251,6 +257,12 @@ struct BrowseNewsView: View {
                                     favorite.date = story.date
                                     
                                     try? moc.save()
+                                    
+                                    FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                        AnalyticsParameterContentType: "add favorite",
+                                        "article_title": story.title,
+                                        "article_url": story.url.absoluteString
+                                    ])
                                 },
                                 label: {
                                     Text("Add to favorites")
@@ -262,6 +274,13 @@ struct BrowseNewsView: View {
                             action: {
                                 sheetManager.selectedItem = story
                                 sheetManager.shouldShowShareSheet.toggle()
+                                
+                                
+                                FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                    AnalyticsParameterContentType: "share article",
+                                    "article_title": story.title,
+                                    "article_url": story.url.absoluteString
+                                ])
                             },
                             label: {
                                 Text("Share")
@@ -314,6 +333,12 @@ struct FavoritesView: View {
                             
                             // save the context
                             try? moc.save()
+                            
+                            FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                AnalyticsParameterContentType: "remove favorite",
+                                "article_title": favoriteNews.title ?? "Unknown title",
+                                "article_url": favoriteNews.url?.absoluteString ?? "Unknown URL"
+                            ])
                         },
                         label: {
                             Text("Remove from favorites")

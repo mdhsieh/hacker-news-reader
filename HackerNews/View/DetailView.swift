@@ -6,12 +6,19 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct DetailView: View {
     let url:String?
     
     var body: some View {
         WebView(urlString: url)
+            .onAppear {
+                FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                    AnalyticsParameterScreenName: "web view",
+                    "url": url ?? "Unknown URL"
+                ])
+            }
     }
 }
 

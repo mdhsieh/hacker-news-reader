@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct CustomColorPicker: View {
     @Binding var selectedColor: Color
@@ -53,6 +54,11 @@ struct CustomColorPicker: View {
                             .onTapGesture {
                                 selectedColor = color
                                 colorData.saveColor(color: selectedColor)
+                                
+                                FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
+                                    AnalyticsParameterContentType: "selected color",
+                                    "color": color.description
+                                ])
                             }
                     }
                     
