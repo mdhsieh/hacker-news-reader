@@ -6,11 +6,16 @@
 //
 
 import SwiftUI
+import Firebase
 
 @main
 struct HackerNewsApp: App {
     
     @StateObject private var dataController = DataController()
+    
+    init() {
+      FirebaseApp.configure()
+    }
     
 	var body: some Scene {
 		WindowGroup {

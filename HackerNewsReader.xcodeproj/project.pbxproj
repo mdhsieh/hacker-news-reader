@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		95A852572538913B007A1D16 /* Story.json in Resources */ = {isa = PBXBuildFile; fileRef = 95A852562538913B007A1D16 /* Story.json */; };
 		95A8525A25389192007A1D16 /* TestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8525925389192007A1D16 /* TestData.swift */; };
 		95A8525D253893ED007A1D16 /* Formatting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95A8525C253893ED007A1D16 /* Formatting.swift */; };
+		F425634228E67CBF00D8884E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F425634128E67CBF00D8884E /* GoogleService-Info.plist */; };
+		F425634528E6867800D8884E /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = F425634428E6867800D8884E /* FirebaseAnalytics */; };
 		F42E038828C5C15B00E31BCA /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E038728C5C15B00E31BCA /* WebView.swift */; };
 		F42E038A28C5C18B00E31BCA /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42E038928C5C18B00E31BCA /* DetailView.swift */; };
 		F432E53628D7A3A1000DD37D /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */; };
@@ -43,6 +45,7 @@
 		95A852562538913B007A1D16 /* Story.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Story.json; sourceTree = "<group>"; };
 		95A8525925389192007A1D16 /* TestData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestData.swift; sourceTree = "<group>"; };
 		95A8525C253893ED007A1D16 /* Formatting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Formatting.swift; sourceTree = "<group>"; };
+		F425634128E67CBF00D8884E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		F42E038728C5C15B00E31BCA /* WebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		F42E038928C5C18B00E31BCA /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
@@ -61,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F425634528E6867800D8884E /* FirebaseAnalytics in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,6 +103,7 @@
 				9575A737253860FD00AFA2CC /* Assets.xcassets */,
 				9575A73C253860FD00AFA2CC /* Info.plist */,
 				95A8525925389192007A1D16 /* TestData.swift */,
+				F425634128E67CBF00D8884E /* GoogleService-Info.plist */,
 				9575A739253860FD00AFA2CC /* Preview Content */,
 			);
 			path = HackerNews;
@@ -208,6 +213,9 @@
 			dependencies = (
 			);
 			name = "HN Reader";
+			packageProductDependencies = (
+				F425634428E6867800D8884E /* FirebaseAnalytics */,
+			);
 			productName = HackerNews;
 			productReference = 9575A730253860F900AFA2CC /* HN Reader.app */;
 			productType = "com.apple.product-type.application";
@@ -235,6 +243,9 @@
 				Base,
 			);
 			mainGroup = 9575A727253860F900AFA2CC;
+			packageReferences = (
+				F425634328E6867800D8884E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 9575A731253860F900AFA2CC /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -251,6 +262,7 @@
 			files = (
 				9575A73B253860FD00AFA2CC /* Preview Assets.xcassets in Resources */,
 				9575A738253860FD00AFA2CC /* Assets.xcassets in Resources */,
+				F425634228E67CBF00D8884E /* GoogleService-Info.plist in Resources */,
 				F432E53628D7A3A1000DD37D /* Launch Screen.storyboard in Resources */,
 				95A852572538913B007A1D16 /* Story.json in Resources */,
 			);
@@ -341,6 +353,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -395,6 +408,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -468,6 +482,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		F425634328E6867800D8884E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 9.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		F425634428E6867800D8884E /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F425634328E6867800D8884E /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		F479FB6128D44D730037B3F9 /* NewsApp.xcdatamodeld */ = {
