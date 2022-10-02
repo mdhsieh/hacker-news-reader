@@ -2,7 +2,7 @@
 A convenient way to read stories from the tech news website Hacker News (HN).
 
 ## Install
-Coming soon
+<img src="badges/appstore-badge.png" height="50">](https://apps.apple.com/app/hnr-hacker-news-reader/id6443591042)
 
 ## Features
 - Browse 100 top or latest stories
