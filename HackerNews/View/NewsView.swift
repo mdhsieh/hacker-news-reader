@@ -319,7 +319,16 @@ struct FavoritesView: View {
           return nil
           
       }
-        return NSPredicate(format: "title CONTAINS[cd] %@", query.lowercased())
+        
+//        return NSPredicate(format: "title CONTAINS[cd] %@", query.lowercased())
+        
+        // Search by title or website like in filteredStories
+        let titlePredicate = NSPredicate(format: "title CONTAINS[cd] %@", query.lowercased())
+        let urlPredicate = NSPredicate(format: "url.formatted CONTAINS[cd] %@", query.lowercased())
+        
+        let predicate = NSCompoundPredicate(orPredicateWithSubpredicates: [titlePredicate, urlPredicate])
+        
+        return predicate
     }
     
     var body: some View {

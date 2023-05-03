@@ -58,7 +58,14 @@ class NewsViewModel: ObservableObject {
         } else {
             return stories.filter( { story -> Bool in
                 if let unwrappedStory = story {
-                    return unwrappedStory.title.lowercased().contains(searchText.lowercased())
+                    
+                    // User may want to search by website instead of title
+                    let formattedUrl = unwrappedStory.url.formatted
+                    
+                    // Filter by title or domain name
+                    return unwrappedStory.title.lowercased().contains(searchText.lowercased()) ||
+                    formattedUrl.contains(searchText.lowercased())
+                    
                 }
                 return false
             } )
