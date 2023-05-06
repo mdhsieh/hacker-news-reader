@@ -15,10 +15,7 @@ struct DetailView: View {
     
     var body: some View {
             
-        VStack {
-            if (!isFinishedLoading) {
-                ProgressView()
-            }
+        ZStack {
             WebView(urlString: url, finishedLoading: $isFinishedLoading)
                 .onAppear {
                     FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
@@ -26,6 +23,11 @@ struct DetailView: View {
                         "url": url ?? "Unknown URL"
                     ])
                 }
+            
+            if (!isFinishedLoading) {
+                ProgressView()
+            }
+            
         }
     }
 }
