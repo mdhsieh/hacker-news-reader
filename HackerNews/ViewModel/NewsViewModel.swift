@@ -8,8 +8,12 @@
 import Foundation
 import SwiftUI
 
+struct Constants {
+     static let ITEM_COUNT: Int = 100
+ }
+
 class NewsViewModel: ObservableObject {
-	@Published var stories: [Item?] = Array(repeating: nil, count: 100)
+    @Published var stories: [Item?] = Array(repeating: nil, count: Constants.ITEM_COUNT)
     @Published var searchText:String = ""
     
     // Nav bar sort options
@@ -33,7 +37,7 @@ class NewsViewModel: ObservableObject {
         }
         let request = APIRequest(url: url)
         request.perform { [weak self] (ids: [Int]?) -> Void in
-            guard let ids = ids?.prefix(100) else { return }
+            guard let ids = ids?.prefix(Constants.ITEM_COUNT) else { return }
             for (index, id) in ids.enumerated() {
                 self?.fetchStory(withID: id) { story in
                     self?.stories[index] = story
