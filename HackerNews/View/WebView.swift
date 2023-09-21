@@ -12,17 +12,9 @@ import WebKit
 struct WebView: UIViewRepresentable {
     
     let urlString:String?
-    var finishedLoading: Binding<Bool>
-    
-    func makeCoordinator() -> WebView.Coordinator {
-        Coordinator(self)
-    }
 
     func makeUIView(context: Context) -> WKWebView {
-        // return WKWebView()
-        let view = WKWebView()
-        view.navigationDelegate = context.coordinator
-        return view
+         return WKWebView()
     }
     
     func updateUIView(_ uiView: WKWebView, context: Context) {
@@ -31,22 +23,6 @@ struct WebView: UIViewRepresentable {
                 let request = URLRequest(url: safeUrl)
                 uiView.load(request)
             }
-        }
-    }
-
-    class Coordinator: NSObject, WKNavigationDelegate {
-        let parent: WebView
-
-        init(_ parent: WebView) {
-            self.parent = parent
-        }
-
-        func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-            if (webView.isLoading) {
-                   return
-            }
-            print("Done Loading")
-            self.parent.finishedLoading.wrappedValue = true
         }
     }
 }

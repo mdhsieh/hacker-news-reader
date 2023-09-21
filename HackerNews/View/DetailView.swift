@@ -11,23 +11,16 @@ import Firebase
 struct DetailView: View {
     let url:String?
     
-    @State var isFinishedLoading: Bool = false
-    
     var body: some View {
             
         ZStack {
-            WebView(urlString: url, finishedLoading: $isFinishedLoading)
+            WebView(urlString: url)
                 .onAppear {
                     FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
                         AnalyticsParameterScreenName: "web view",
                         "url": url ?? "Unknown URL"
                     ])
                 }
-            
-            if (!isFinishedLoading) {
-                ProgressView()
-            }
-            
         }
     }
 }
