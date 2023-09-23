@@ -103,9 +103,10 @@ struct Story: View {
 	let commentCount: String
     let urlStr:String
     let selectedColor: Color
+    let item: Item
 	
 	var body: some View {
-        NavigationLink(destination: DetailView(url: urlStr)) {
+        NavigationLink(destination: DetailView(url: urlStr, story: self.item, favoriteNews: nil)) {
             HStack(alignment: .top, spacing: 16.0) {
                 Position(position: position, selectedColor: selectedColor)
                 VStack(alignment: .leading, spacing: 8.0) {
@@ -130,14 +131,15 @@ struct Story: View {
 extension Story {
     init(position: Int, item: Item, selectedColor: Color) {
 		self.position = position
-		title = item.title
-		score = item.score.formatted
-		commentCount = item.commentCount.formatted
-		footnote = item.url.formatted
+        self.title = item.title
+        self.score = item.score.formatted
+        self.commentCount = item.commentCount.formatted
+        self.footnote = item.url.formatted
 			+ " - \(item.date.timeAgo)"
 			+ " - by \(item.author)"
         self.urlStr = item.url.absoluteString
         self.selectedColor = selectedColor
+        self.item = item
 	}
 }
 
@@ -187,7 +189,7 @@ struct FavoriteStory: View {
     var selectedColor: Color
     
     var body: some View {
-        NavigationLink(destination: DetailView(url: favorite.url?.absoluteString)) {
+        NavigationLink(destination: DetailView(url: favorite.url?.absoluteString, story: nil, favoriteNews: favorite)) {
             HStack(alignment: .top, spacing: 16.0) {
                 VStack(alignment: .leading, spacing: 8.0) {
                     Text(favorite.title ?? "Unknown")
