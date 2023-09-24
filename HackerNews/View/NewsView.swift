@@ -67,6 +67,8 @@ struct NewsView: View {
                     // remove the notification badge after open app
                     UIApplication.shared.applicationIconBadgeNumber = 0
                     
+                    NotificationManager.instance.removeNotifications()
+                    
                     // Change selected color to whatever was saved in
                     // user defaults
                     selectedColor = colorData.loadColor()
