@@ -67,15 +67,13 @@ struct DetailView: View {
                 
             }
             .toolbar {
+                Button {
+                    openURL(URL(string: url!)!)
+                } label: {
+                    Image(systemName: "safari")
+                }
+                
                 if isFavorite {
-                    Button {
-                        if let favoriteNews = favoriteNews {
-                            openURL(favoriteNews.url!)
-                        }
-                    } label: {
-                        Image(systemName: "safari")
-                    }
-                    
                     // Article from favorites list or
                     // Article from browse news lists matches an item in favorites list
                     Button(
@@ -95,14 +93,6 @@ struct DetailView: View {
                        }
                    )
                 } else {
-                    Button {
-                        if let story = story {
-                            openURL(story.url)
-                        }
-                    } label: {
-                        Image(systemName: "safari")
-                    }
-                    
                     // Article from browse news list
                     Button(
                         action: {
