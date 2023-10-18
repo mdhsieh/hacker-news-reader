@@ -16,11 +16,12 @@ struct Item: Identifiable, Equatable, Hashable {
 	let title: String
 	let date: Date
 	let url: URL
+    let kids: [Int]
 }
 
 extension Item: Decodable {
 	enum CodingKeys: String, CodingKey {
-		case id, score, title, url
+		case id, score, title, url, kids
 		case commentCount = "descendants"
 		case date = "time"
 		case author = "by"

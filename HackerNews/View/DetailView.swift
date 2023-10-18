@@ -25,6 +25,8 @@ struct DetailView: View {
     
     @Environment(\.openURL) var openURL
     
+    @State private var showingComments = false
+    
     // Return array of 1 CoreData favorite item if
     // matches story,
     // otherwise returns empty array
@@ -93,6 +95,14 @@ struct DetailView: View {
                        }
                    )
                 } else {
+                    Button {
+                        if let story = story {
+                            showingComments = true
+                        }
+                    } label: {
+                        Image(systemName: "bubble.right")
+                    }
+                    
                     // Article from browse news list
                     Button(
                         action: {
@@ -118,7 +128,55 @@ struct DetailView: View {
                         }
                     )
                 }
+            }.sheet(isPresented: $showingComments) {
+                CommentsView(commentIds: story!.kids)
             }
+    }
+}
+struct CommentsView: View {
+    @Environment(\.dismiss) private var dismiss
+    var commentIds: [Int]
+    @StateObject private var commentsModel = CommentsViewModel()
+    
+    var body: some View {
+            VStack {
+                HStack {
+                    Spacer()
+                    
+                    Button {
+                        dismiss()
+                    } label: {
+                        Image(systemName: "xmark")
+                            .padding()
+                    }
+                }
+                
+                ScrollView {
+                    ForEach(commentsModel.comments, id:\.self) { comment in
+                        if let comment = comment {
+                            VStack {
+                                Text("\(comment.author) \(comment.date.timeAgo)")
+                                Text("\(removeHTMLTags(str: comment.text.stringByDecodingHTMLEntities))")
+                            }
+                            .padding()
+                            
+                           Divider()
+                        }
+                    }
+                }
+            }
+            .onAppear {
+                commentsModel.fetchComments(ids: commentIds)
+        }
+    }
+    
+    func removeHTMLTags(str: String) -> String {
+        return str.replacingOccurrences(
+            of: "<[^>]+>",
+            with:"",
+            options: String.CompareOptions.regularExpression,
+            range: nil
+        )
     }
 }
 
