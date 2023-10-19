@@ -30,6 +30,7 @@
 		F4C72F1728E54AC1006909E5 /* FavoriteSheetManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C72F1628E54AC1006909E5 /* FavoriteSheetManager.swift */; };
 		F4DF63862AE07A4800698F66 /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF63852AE07A4800698F66 /* Comment.swift */; };
 		F4DF63882AE0854B00698F66 /* CommentsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF63872AE0854B00698F66 /* CommentsViewModel.swift */; };
+		F4DF638A2AE1A9D200698F66 /* HTMLStringView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4DF63892AE1A9D200698F66 /* HTMLStringView.swift */; };
 		F4E3A06B28E2A0E50035F0E9 /* CustomColorPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */; };
 		F4E3A07128E3A6070035F0E9 /* ColorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E3A07028E3A6070035F0E9 /* ColorData.swift */; };
 /* End PBXBuildFile section */
@@ -59,6 +60,7 @@
 		F4C72F1628E54AC1006909E5 /* FavoriteSheetManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteSheetManager.swift; sourceTree = "<group>"; };
 		F4DF63852AE07A4800698F66 /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F4DF63872AE0854B00698F66 /* CommentsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsViewModel.swift; sourceTree = "<group>"; };
+		F4DF63892AE1A9D200698F66 /* HTMLStringView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTMLStringView.swift; sourceTree = "<group>"; };
 		F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColorPicker.swift; sourceTree = "<group>"; };
 		F4E3A07028E3A6070035F0E9 /* ColorData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +142,7 @@
 				F42E038728C5C15B00E31BCA /* WebView.swift */,
 				F4E3A06A28E2A0E50035F0E9 /* CustomColorPicker.swift */,
 				F432E53528D7A3A1000DD37D /* Launch Screen.storyboard */,
+				F4DF63892AE1A9D200698F66 /* HTMLStringView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -287,6 +290,7 @@
 				F4E3A07128E3A6070035F0E9 /* ColorData.swift in Sources */,
 				F479FB6328D44D730037B3F9 /* NewsApp.xcdatamodeld in Sources */,
 				F42E038A28C5C18B00E31BCA /* DetailView.swift in Sources */,
+				F4DF638A2AE1A9D200698F66 /* HTMLStringView.swift in Sources */,
 				F42E038828C5C15B00E31BCA /* WebView.swift in Sources */,
 				F4DF63862AE07A4800698F66 /* Comment.swift in Sources */,
 				95A1E36E2540375800052C21 /* APIRequest.swift in Sources */,

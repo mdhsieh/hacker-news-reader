@@ -96,9 +96,7 @@ struct DetailView: View {
                    )
                 } else {
                     Button {
-                        if let story = story {
-                            showingComments = true
-                        }
+                        showingComments = true
                     } label: {
                         Image(systemName: "bubble.right")
                     }
@@ -129,7 +127,9 @@ struct DetailView: View {
                     )
                 }
             }.sheet(isPresented: $showingComments) {
-                CommentsView(commentIds: story!.kids)
+                if let story = story {
+                    CommentsView(commentIds: story.kids)
+                }
             }
     }
 }
@@ -139,44 +139,36 @@ struct CommentsView: View {
     @StateObject private var commentsModel = CommentsViewModel()
     
     var body: some View {
-            VStack {
-                HStack {
-                    Spacer()
-                    
-                    Button {
-                        dismiss()
-                    } label: {
-                        Image(systemName: "xmark")
-                            .padding()
-                    }
-                }
+        VStack {
+            HStack {
+                Spacer()
                 
-                ScrollView {
-                    ForEach(commentsModel.comments, id:\.self) { comment in
-                        if let comment = comment {
-                            VStack {
-                                Text("\(comment.author) \(comment.date.timeAgo)")
-                                Text("\(removeHTMLTags(str: comment.text.stringByDecodingHTMLEntities))")
-                            }
-                            .padding()
-                            
-                           Divider()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark")
+                        .padding()
+                }
+            }
+            
+            ScrollView {
+                ForEach(commentsModel.comments, id:\.self) { comment in
+                    if let comment = comment {
+                        VStack {
+                            Text("\(comment.author) \(comment.date.timeAgo)")
+                            HTMLStringView(htmlContent: comment.text)
+                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 150, maxHeight: .infinity)
                         }
+                        .padding()
+                        
+                       Divider()
                     }
                 }
             }
-            .onAppear {
-                commentsModel.fetchComments(ids: commentIds)
         }
-    }
-    
-    func removeHTMLTags(str: String) -> String {
-        return str.replacingOccurrences(
-            of: "<[^>]+>",
-            with:"",
-            options: String.CompareOptions.regularExpression,
-            range: nil
-        )
+        .onAppear {
+            commentsModel.fetchComments(ids: commentIds)
+        }
     }
 }
 
