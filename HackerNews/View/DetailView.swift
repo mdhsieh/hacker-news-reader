@@ -70,6 +70,12 @@ struct DetailView: View {
             }
             .toolbar {
                 Button {
+                    showingComments = true
+                } label: {
+                    Image(systemName: "bubble.right")
+                }
+                
+                Button {
                     openURL(URL(string: url!)!)
                 } label: {
                     Image(systemName: "safari")
@@ -95,12 +101,6 @@ struct DetailView: View {
                        }
                    )
                 } else {
-                    Button {
-                        showingComments = true
-                    } label: {
-                        Image(systemName: "bubble.right")
-                    }
-                    
                     // Article from browse news list
                     Button(
                         action: {
@@ -116,6 +116,9 @@ struct DetailView: View {
                                 favorite.url = story.url
                                 favorite.date = story.date
                                 
+                                favorite.storyId = Int64(story.id)
+                                favorite.kids = story.kids as NSObject as? [Int]
+                                
                                 try? moc.save()
                             
                                 isFavorite = true
@@ -129,6 +132,10 @@ struct DetailView: View {
             }.sheet(isPresented: $showingComments) {
                 if let story = story {
                     CommentsView(commentIds: story.kids)
+                } else {
+                    if let favoriteNews = favoriteNews {
+                        CommentsView(commentIds: favoriteNews.kids ?? [])
+                    }
                 }
             }
     }
@@ -149,6 +156,11 @@ struct CommentsView: View {
                     Image(systemName: "xmark")
                         .padding()
                 }
+            }
+            
+            if (commentsModel.comments.isEmpty) {
+                Text("No comments")
+                    .padding()
             }
             
             ScrollView {

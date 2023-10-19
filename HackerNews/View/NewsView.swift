@@ -255,6 +255,9 @@ struct BrowseNewsView: View {
                                     favorite.url = story.url
                                     favorite.date = story.date
                                     
+                                    favorite.storyId = Int64(story.id)
+                                    favorite.kids = story.kids as NSObject as? [Int]
+                                    
                                     try? moc.save()
                                     
                                     FirebaseAnalytics.Analytics.logEvent(AnalyticsEventSelectContent, parameters: [
