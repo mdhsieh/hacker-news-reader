@@ -18,7 +18,6 @@ struct NewsView: View {
     private var colorData = ColorData()
     
 	var body: some View {
-        
         TabView {
             NavigationView {
                 // Get both the index and the Item? in order to show position number
@@ -88,6 +87,7 @@ struct NewsView: View {
                 Label("Favorites", systemImage: "heart")
             }
         }
+        .tint(selectedColor)
 	}
 }
 
