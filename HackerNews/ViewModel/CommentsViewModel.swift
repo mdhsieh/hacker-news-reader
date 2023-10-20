@@ -14,7 +14,7 @@ class CommentsViewModel: ObservableObject {
     func fetchComments(ids: [Int]) {
         for (index, id) in ids.enumerated() {
             self.fetchComment(withID: id) { comment in
-                self.comments[index] = comment
+                self.comments.append(comment)
             }
         }
     }
