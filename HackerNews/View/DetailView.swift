@@ -117,7 +117,12 @@ struct DetailView: View {
                                 favorite.date = story.date
                                 
                                 favorite.storyId = Int64(story.id)
-                                favorite.kids = story.kids as NSObject as? [Int]
+
+                                if let kids = story.kids {
+                                    favorite.kids = kids as NSObject as? [Int]
+                                } else {
+                                    favorite.kids = []
+                                }
                                 
                                 try? moc.save()
                             
@@ -131,7 +136,7 @@ struct DetailView: View {
                 }
             }.sheet(isPresented: $showingComments) {
                 if let story = story {
-                    CommentsView(commentIds: story.kids)
+                    CommentsView(commentIds: story.kids ?? [])
                 } else {
                     if let favoriteNews = favoriteNews {
                         CommentsView(commentIds: favoriteNews.kids ?? [])
@@ -156,11 +161,6 @@ struct CommentsView: View {
                     Image(systemName: "xmark")
                         .padding()
                 }
-            }
-            
-            if (commentsModel.comments.isEmpty) {
-                Text("No comments")
-                    .padding()
             }
             
             ScrollView {

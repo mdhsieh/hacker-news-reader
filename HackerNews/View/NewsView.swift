@@ -256,7 +256,14 @@ struct BrowseNewsView: View {
                                     favorite.date = story.date
                                     
                                     favorite.storyId = Int64(story.id)
-                                    favorite.kids = story.kids as NSObject as? [Int]
+                                    
+                                    // no kids field exists, which can happen
+                                    // if descendants count is 0
+                                    if let kids = story.kids {
+                                        favorite.kids = kids as NSObject as? [Int]
+                                    } else {
+                                        favorite.kids = []
+                                    }
                                     
                                     try? moc.save()
                                     

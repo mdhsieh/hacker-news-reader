@@ -16,7 +16,7 @@ struct Item: Identifiable, Equatable, Hashable {
 	let title: String
 	let date: Date
 	let url: URL
-    let kids: [Int]
+    let kids: [Int]?
 }
 
 extension Item: Decodable {
