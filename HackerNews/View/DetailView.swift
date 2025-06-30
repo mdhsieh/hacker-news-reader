@@ -164,18 +164,24 @@ struct CommentsView: View {
             }
             
             ScrollView {
-                ForEach(commentsModel.comments, id:\.self) { comment in
-                    if let comment = comment {
-                        VStack {
-                            Text("\(comment.author) \(comment.date.timeAgo)")
-                            HTMLStringView(htmlContent: comment.text)
-                                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, idealHeight: 150, maxHeight: .infinity)
-                        }
-                        .padding()
-                        
-                       Divider()
+                let allAreNil = commentsModel.comments.allSatisfy { $0 == nil }
+                
+                if allAreNil {
+                    VStack {
+                        Text("No comments found.")
+                    }
+                    .padding()
+                    
+                   Divider()
+                }
+                
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(commentsModel.comments, id: \.id) { commentNode in
+                        CommentNodeView(node: commentNode, model: commentsModel, depth: 0)
                     }
                 }
+                .padding()
+
             }
         }
         .onAppear {
